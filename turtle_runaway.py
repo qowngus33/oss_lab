@@ -4,7 +4,7 @@ import turtle, random
 import time
 
 class RunawayGame:
-    def __init__(self, canvas, runner, chaser, chaserchaser, catch_radius=50, play_time=10):
+    def __init__(self, canvas, runner, chaser, chaserchaser, catch_radius=50, play_time=30):
         self.canvas = canvas
         self.canvas.title('Turtle Runaway')
         self.runner = runner
