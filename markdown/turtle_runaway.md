@@ -7,5 +7,7 @@
 * 주어진 시간이 지나면 GameOver라는 문구가 뜨며 더이상 점수가 바뀌지 않습니다.
 * 밥은 주어진 반경 안에서만 움직이게끔 되어있습니다. (-300, 300)
 
-![](../data/turtle_runaway.png)
-![](../data/turtle_runaway_gameover.png)
+<img width="868" alt="turtle_runaway" src="https://user-images.githubusercontent.com/83813866/194070720-34848fe1-0742-4b34-84a0-1abccc6eeb49.png">
+
+<img width="868" alt="turtle_runaway_gameover" src="https://user-images.githubusercontent.com/83813866/194070732-5cdf8660-056a-4026-9453-3d28d9af762d.png">
+
