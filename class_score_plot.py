@@ -39,5 +39,6 @@ if __name__ == '__main__':
     plt.hist(total_en,label="english",bins=20,range=(0,100),color="blue",alpha=0.3)
     plt.xlabel('Total scores')
     plt.ylabel('The number of students')
+    plt.xlim([0, 100])
     plt.legend()
     plt.show()
