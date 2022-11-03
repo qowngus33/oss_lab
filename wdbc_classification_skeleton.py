@@ -1,6 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
-from sklearn import (datasets, svm, metrics)
+from sklearn import (datasets, svm, metrics, ensemble)
 from matplotlib.lines import Line2D # For the custom legend
 
 def load_wdbc_data(filename):
@@ -15,18 +15,18 @@ def load_wdbc_data(filename):
     with open(filename) as f:
         for line in f.readlines():
             items = line.split(',')
-            wdbc.target.append(0)               # TODO #1) Implement here (0 or 1)
-            wdbc.data.append([0, 0])            # TODO #1) Implement here (30 real numbers)
+            wdbc.target.append(int(items[1] != "M"))
+            wdbc.data.append(list(np.float_(items[2:])))
         wdbc.data = np.array(wdbc.data)
     return wdbc
 
 if __name__ == '__main__':
     # Load a dataset
     # wdbc = datasets.load_breast_cancer()
-    wdbc = load_wdbc_data('data/wdbc.data')     # TODO #1) Implement 'load_wdbc_data()'
+    wdbc = load_wdbc_data('data/wdbc.data')
 
     # Train a model
-    model = svm.SVC()                           # TODO #2) Find any better classifier (SVC: 525/569=0.923)
+    model = ensemble.RandomForestClassifier()
     model.fit(wdbc.data, wdbc.target)
 
     # Test the model
@@ -34,7 +34,9 @@ if __name__ == '__main__':
     n_correct = sum(predict == wdbc.target)
     accuracy = n_correct / len(wdbc.data)
 
-    # TODO #3) Visualize the confusion matrix
+    conf_mat = metrics.confusion_matrix(wdbc.target, predict)
+    conf_dis = metrics.ConfusionMatrixDisplay(conf_mat, display_labels=['false', 'true'])
+    conf_dis.plot()
 
     # Visualize testing results
     cmap = np.array([(1, 0, 0), (0, 1, 0)])
