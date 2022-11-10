@@ -16,7 +16,7 @@ A = np.vstack((xn**3, xn**2, xn, np.ones(xn.shape))).T
 b = yn
 curve = np.linalg.pinv(A) @ b
 
-plt.title(f'Curve: y={curve[0]:.3f}*$x^3$ + {curve[1]:.3f}*$x^2$ + {curve[2]:.3f}*$x$ + {curve[3]:.3f}')
+plt.title(f'Curve: y={curve[0]:04.3f}*$x^3$ + {curve[1]:.3f}*$x^2$ + {curve[2]:.3f}*$x$ + {curve[3]:.3f}')
 xc = np.linspace(*data_range, 100)
 plt.plot(xc, true_curve(xc), 'r-', label='The true curve')
 plt.plot(xn, yn, 'b.', label='Noisy data')
