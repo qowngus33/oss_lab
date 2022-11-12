@@ -1,31 +1,44 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-true_line = lambda x: -2/3*x + 14/3
-data_range = np.array([-4,12])
-data_num = 100
-noise_std = 0.5
+def buildA(order, xs):
+    A = np.empty((0, len(xs)))
+    print(A)
+    for i in range(order + 1):
+        A = np.vstack((xs**i, A))
+        print(A)
+    return A.T
 
-x = np.random.uniform(data_range[0],data_range[1],size=data_num)
-y = true_line(x)
+if __name__ == "__main__":
+    true_coeff = [0.1, -0.8, -1.5, 5.4]
+    poly_order = 3
+    data_range = (-6, 12)
+    data_num = 10
+    noise_std = 0.5
 
-xn = x + np.random.normal(scale=noise_std, size=x.shape)
-yn = y + np.random.normal(scale=noise_std, size=y.shape)
+    x = np.random.uniform(data_range[0],data_range[1],size=data_num)
+    y = buildA(len(true_coeff) - 1, x) @ true_coeff
 
-A = np.vstack((xn, np.ones(xn.shape))).T
-b = yn
-line = np.linalg.pinv(A) @ b
+    xn = x + np.random.normal(scale=noise_std, size=x.shape)
+    yn = y + np.random.normal(scale=noise_std, size=y.shape)
 
-plt.title(f'Line: y={line[0]:.3f}*x + {line[1]:.3f}')
+    A = buildA(poly_order, xn)
+    b = yn
+    coeff = np.linalg.pinv(A) @ b
 
-# "-": 실선, "--": 점선, ".": 점
-plt.plot(data_range, true_line(data_range), '-r', label='The true line')
-plt.plot(xn, yn, 'b.', label='Noisy data')
-plt.plot(data_range, line[0]*data_range + line[1], 'g-', label='Estimate')
+    # Plot the data and result
+    plt.title(f'Order: {poly_order}, Coeff: ' + np.array2string(coeff, precision=2, suppress_small=True))
+    xc = np.linspace(*data_range, 100)
 
-# X축이 표시되는 범위를 지정하거나 반환
-plt.xlim(data_range)
+    # true line
+    plt.plot(xc, np.matmul(buildA(len(true_coeff) - 1, xc), true_coeff), 'k-', label='The true curve', alpha=0.2)
 
-# show legend(범례)
-plt.legend()
-plt.show()
+    # noisy data
+    plt.plot(xn, yn, 'b.', label='Noisy data')
+
+    # estimate
+    plt.plot(xc, np.matmul(buildA(poly_order, xc), coeff), 'g-', label='Estimate')
+
+    plt.xlim(data_range)
+    plt.legend()
+    plt.show()
