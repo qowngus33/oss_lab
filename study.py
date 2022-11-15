@@ -1,11 +1,14 @@
-with open('data/class_score_en.csv', 'r') as fi, \
-        open('class_score_mean_en.csv', 'w') as fo:
-    for line in fi.readlines():
-        try:
-            values = [int(text) for text in line.split(',')]
-            mean = sum(values) / len(values)
-            for val in values:
-                fo.write(f'{val}, ')
-            fo.write(f'{mean}\n')
-        except ValueError as ex: # Try 'FileNotFoundError' and 'Exception' (base class)
-            print(f'A line is ignored. (message: {ex})')
+print(8 / 2, 8 // 2)
+print(7.9 / 2, 7.9 // 2)
+print(7.8 / 2, 7.8 // 2)
+print(7.7 / 2, 7.7 // 2)
+print(7.6 / 2, 7.6 // 2)
+print(7.5 / 2, 7.5 // 2)
+print(7.4 / 2, 7.4 // 2)
+print(7.3 / 2, 7.3 // 2)
+print(7.2 / 2, 7.2 // 2)
+print(7.1 / 2, 7.1 // 2)
+print(7.0 / 2, 7.0 // 2)
+print(6.9 / 2, 6.9 // 2)
+print(6.0 / 2, 6.0 // 2)
+print(5.9 / 2, 5.9 // 2)
